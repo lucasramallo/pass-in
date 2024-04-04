@@ -1,13 +1,12 @@
-package com.lucasramalho.passin.Domain.event;
+package com.lucasramalho.passin.domain.event;
 
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Enabled
+@Entity
 @Table(name = "events")
 @Getter
 @Setter

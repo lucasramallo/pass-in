@@ -1,6 +1,6 @@
-package com.lucasramalho.passin.Domain.attendee;
+package com.lucasramalho.passin.domain.attendee;
 
-import com.lucasramalho.passin.Domain.event.Event;
+import com.lucasramalho.passin.domain.event.Event;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Attendee {
 
+    @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
