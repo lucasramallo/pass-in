@@ -2,10 +2,10 @@ package com.lucasramalho.passin.services;
 
 import com.lucasramalho.passin.domain.attendee.Attendee;
 import com.lucasramalho.passin.domain.event.Event;
+import com.lucasramalho.passin.domain.event.exceptions.EventNotFoundException;
 import com.lucasramalho.passin.dto.event.EventIdDTO;
 import com.lucasramalho.passin.dto.event.EventRequestDTO;
 import com.lucasramalho.passin.dto.event.EventResponseDTO;
-import com.lucasramalho.passin.repositories.AttendeeRepository;
 import com.lucasramalho.passin.repositories.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventService {
     private final EventRepository eventRepository;
-        private final AttendeeRepository attendeeRepository;
+    private final AttendeeService attendeeService;
 
     public EventResponseDTO getEventDetail(String eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(
-                () -> new RuntimeException("Evento não encontrado!")
+                () -> new EventNotFoundException("Event not found by id! " + eventId)
         );
-        List<Attendee> attendeeList = this.attendeeRepository.findByEventId(eventId);
+        List<Attendee> attendeeList = this.attendeeService.getAllAttendeesFromEvent(eventId);
         return new EventResponseDTO(event, attendeeList.size());
     }
 
